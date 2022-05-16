@@ -23,7 +23,6 @@ public class ChessboardMain {
         frame.add(userInterface) ;
         frame.setSize(700,700) ;
         frame.setVisible(true);
-
     }
 
     public static String possibleMove(){
