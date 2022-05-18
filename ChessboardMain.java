@@ -60,7 +60,33 @@ public class ChessboardMain {
         return move ;
     }
     public static String possibleQ(int i) {
-        String move = "" ;
+        String move = "" ;oldPiece ;
+        int x = i/8, y = i%8 ;
+        int index = 1;
+        for (int j=-1; j<=1; j++) {
+            for (int k=-1; k<=1; k++) {
+                if (j!=0 || k!=0) {
+
+                 //error handling
+                    try {
+                        if (" ".equals(chessBoard[x+temp*j][y+temp*k])) {
+                            oldPiece = chessBoard[x+temp*j][y+temp*k];
+                            chessBoard[x][y] = " ";
+                            chessBoard[x+temp*j][y+temp*k] = "Q";
+                            int kingPlace = kingCoorBig;
+                            kingCoorBig = i + (j/3) * 8 + j%3 - 9;
+                            if (kingSafe()) {
+                                move = move + x + y + (x+temp*j) + (y+temp*k)+oldPiece;
+                            }
+                            chessBoard[x][y] = "Q";
+                            chessBoard[x+temp*j][y+temp*k] = oldPiece;
+                            kingCoorBig = kingPlace;
+                        }
+
+                    } catch (Exception e){}
+                }
+            }
+        }
         return move ;
     }
     public static String possibleE(int i) {
