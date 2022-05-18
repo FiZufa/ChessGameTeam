@@ -8,7 +8,7 @@ public class ChessboardMain {
             {" ", " ", " ", " ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " ", " ", " ", " "},
-            {"E", " ", " ", " ", " ", " ", " ", " "},
+            {" ", " ", " ", " ", " ", " ", " ", " "},
             {"P", "P", "P", "P", "P", "P", "P", "P"},
             {"R", "K", "B", "Q", "E", "B", "K", "R"}
     } ;
@@ -31,7 +31,7 @@ public class ChessboardMain {
     public static String possibleMove(){
         String move = "" ;
         for (int i=0 ; i < 64 ; i++){
-            switch (chessBoard[i/8][i/8]) {
+            switch (chessBoard[i/8][i%8]) {
                 case "p" : move += possibleP(i) ; break ;
                 case "R" : move += possibleR(i) ; break ;
                 case "K" : move += possibleK(i) ; break ;
@@ -68,7 +68,8 @@ public class ChessboardMain {
         int x = i/8, y=i%8 ;
         for (int j=0 ; j<9 ; j++){
             if(j != 4) {
-                //error handling
+
+                 //error handling
                 try {
                     if (Character.isLowerCase(chessBoard[x - 1 + j/3][y - 1 + j%3].charAt(0)) ||
                             " ".equals(chessBoard[x - 1 + j/3][y - 1 + j%3])) {
