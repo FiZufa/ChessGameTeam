@@ -5,5 +5,6 @@ public class ChessMove {
             public ChessMove(int helloMarietta, int fromFitria){
                 this.helloMarietta = helloMarietta ;
                 this.fromFitria = fromFitria ;
+                //bisa liat ini?
             }
 }

@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 public class ChessboardMain {
 
     static String chessBoard[][] = {
@@ -16,13 +18,13 @@ public class ChessboardMain {
 
     public static void main(String[] args){
 
-        /*JFrame frame = new JFrame("Chess Game");
+        JFrame frame = new JFrame("Chess Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         UserInterface userInterface = new UserInterface();
         frame.add(userInterface) ;
         frame.setSize(700,700) ;
-        frame.setVisible(true);*/
+        frame.setVisible(true);
         System.out.println(possibleMove());
     }
 
