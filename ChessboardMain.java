@@ -49,7 +49,7 @@ public class ChessboardMain {
         for (int j=-1; j<=1; j+=2) {
             try {//capture
                 if (Character.isLowerCase(chessBoard[x-1][y+j].charAt(0)) && i>=16) {
-                    oldPiece=chessBoard[r-1][c+j];
+                    oldPiece=chessBoard[x-1][y+j];
                     chessBoard[x][y]=" ";
                     chessBoard[x-1][y+j]="P";
                     if (kingSafe()) {
@@ -161,9 +161,10 @@ public class ChessboardMain {
         return move ;
     }
     public static String possibleQ(int i) {
-        String move = "" ;oldPiece ;
+        String move = "" ;
+        String oldPiece ;
         int x = i/8, y = i%8 ;
-        int index = 1;
+        int temp = 1;
         for (int j=-1; j<=1; j++) {
             for (int k=-1; k<=1; k++) {
                 if (j!=0 || k!=0) {
@@ -179,7 +180,7 @@ public class ChessboardMain {
                             }
                             chessBoard[x][y] = "Q";
                             chessBoard[x+temp*j][y+temp*k] = oldPiece;
-                            index++;
+                            temp++;
                         }
                         if (Character.isLowerCase(chessBoard[x+temp*j][y+temp*k].charAt(0))) {
                             oldPiece=chessBoard[x+temp*j][y+temp*k];
