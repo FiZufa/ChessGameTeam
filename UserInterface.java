@@ -6,6 +6,8 @@ import java.awt.event.MouseMotionListener;
 
 public class UserInterface extends JPanel implements MouseListener, MouseMotionListener {
     static int userHandX, userHandY, newUserHandX, newUserHandY ;
+    static int userWhite = -1 ;
+    static int globalDepth = 4 ;
 
     static int x=0 ;
     static int y=0 ;
@@ -69,21 +71,25 @@ public class UserInterface extends JPanel implements MouseListener, MouseMotionL
         }
     }
     public void mouseReleased(MouseEvent event){
-        String moveDrag ;
         if(event.getX() < 8*boardSize && event.getY() < 8*boardSize){
-            newUserHandX = event.get() ;
+            newUserHandX = event.getX() ;
             newUserHandY = event.getY();
             if (event.getButton() == MouseEvent.BUTTON1){
-                if(newUserHandY/boardSize == 0 && userHandY/boardSize == 1 && "p".equals(ChessboardMain.chessBoard[userHandY/boardSize][userHandX/boardSize])){
-                    moveDrag = "" + userHandY/boardSize + userHandX/boardSize + ChessboardMain.chessBoard[newUserHandY/boardSize][newUserHandX/boardSize]"QP" ;
+                String moveDrag ;
+                if(newUserHandY/boardSize == 0 && userHandY/boardSize == 1 && "P".equals(ChessboardMain.chessBoard[userHandY/boardSize][userHandX/boardSize])){
+                    moveDrag = "" + userHandY/boardSize + newUserHandX/boardSize + ChessboardMain.chessBoard[newUserHandY/boardSize][newUserHandX/boardSize] +"QP" ;
                         //pawn
                 } else {
                     // regular move
-                    moveDrag = "" + userHandY/boardSize + userHandX/boardSize + newUserHandY/boardSize + newUserHandX/boardSize ;
+                    moveDrag = "" + userHandY/boardSize + userHandX/boardSize + newUserHandY/boardSize + newUserHandX/boardSize + ChessboardMain.chessBoard[newUserHandY/boardSize][newUserHandX/boardSize] ;
                 }
                 String userPossible = ChessboardMain.possibleMove();
-                if (userPossible.replace(moveDrag, ""). length() < userPossible.length()){
-                    ChessboardMain.makeMove(moveDrag) ;
+                if (userPossible.replaceAll(moveDrag, "").length() < userPossible.length()){
+                    ChessboardMain.makeMove(moveDrag) ; //??????????
+                    ChessboardMain.flipBoard() ;
+                    ChessboardMain.makeMove(alphaBeta(ChessboardMain.globalDepth, 1000000, -1000000, "", 0)) ;
+                    ChessboardMain.flipBoard() ;
+                    repaint() ;
                 }
 
             }

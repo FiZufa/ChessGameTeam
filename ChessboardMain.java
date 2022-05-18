@@ -57,6 +57,36 @@ public class ChessboardMain {
     }
     public static String possibleK(int i) {
         String move = "" ;
+        String oldPiece ;
+        int x=i/8 , y=i%8 ;
+        int temp = 1 ;
+        for (int j=-1 ; j <= 1 ; j+=2){
+            for (int k=-1 ; j<=1 ; k+=2){
+                try{
+                    if ( Character.isLowerCase(chessBoard[x+j][y+k*2].charAt(0))|| " ".equals((chessBoard[x+j][y+k*2]))){
+                        oldPiece = chessBoard[x+j][y+k*2] ;
+                        chessBoard[x][y] = " " ;
+                        if (kingSafe()){
+                            move = move + x + y + (x+j) + (y+k*2) + oldPiece ;
+                        }
+                        chessBoard[x][y] = "K" ;
+                        chessBoard[x+j][y+k*2] = oldPiece ;
+                    }
+                } catch (Exception e){}
+
+                try{
+                    if (Character.isLowerCase(chessBoard[x+j*2][y+k].charAt(0)) || " ".equals(chessBoard[x+j*2][y+k])){
+                        oldPiece = chessBoard[x+j*2][y+k] ;
+                        chessBoard[x][y] = " ";
+                        if (kingSafe()){
+                            move = move + x + y + (x+j*2) + (y+k) + oldPiece ;
+                        }
+                        chessBoard[x][y] = "K" ;
+                        chessBoard[x+j*2][y+k] = oldPiece ;
+                    }
+                } catch (Exception e){}
+            }
+        }
         return move ;
     }
     public static String possibleQ(int i) {
