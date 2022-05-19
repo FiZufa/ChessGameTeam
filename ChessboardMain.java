@@ -325,8 +325,71 @@ public class ChessboardMain {
     public static boolean kingSafe(){
         // bishop
         int temp = 1 ;
+        for (int i=-1 ; i <= 1 ; i+=2){
+            for (int j=-1 ; i<=1 ; j+=2){
+                try {
+                    while (" ".equals(chessBoard[kingCoorBig/8+temp*i][kingCoorBig%8+temp*j])){
+                        temp++ ;
+                    }
+                    if ("r".equals(chessBoard[kingCoorBig/8][kingCoorBig%8+temp*i]) || "q".equals(chessBoard[kingCoorBig/8][kingCoorBig%8+temp*i])){
+                        return false ;
+                    }
+                } catch (Exception e){}
+                temp = 1 ;
+                try {
+                    while (" ".equals(chessBoard[kingCoorBig/8+temp*i][kingCoorBig%8])){
+                        temp++ ;
+                    }
+                    if ("r".equals(chessBoard[kingCoorBig/8+temp*i][kingCoorBig%8]) || "r".equals(chessBoard[kingCoorBig/8+temp*i][kingCoorBig%8])){
+                        return false ;
+                    }
+                } catch (Exception e) {}
+                temp = 1 ;
+            }
+        }
+        // knight
+        for (int i=-1 ; i <= 1 ; i+=2){
+            for (int j=-1 ; i<=1 ; j+=2){
+                try {
+                    if ("k".equals(chessBoard[kingCoorBig/8+1][kingCoorBig%8+j*2])){
+                        return false ;
+                    }
+                } catch (Exception e){}
+                try {
+                    if ("k".equals(chessBoard[kingCoorBig/8+1*2][kingCoorBig%8+j])){
+                        return false ;
+                    }
+                } catch (Exception e){}
+            }
+        }
+        // pawn
+        if (kingCoorBig >= 16){
+            try {
+                if ("p".equals(chessBoard[kingCoorBig/80-1][kingCoorBig%8-1])){
+                    return false ;
+                }
+            } catch (Exception e){}
+            try {
+                if ("p".equals(chessBoard[kingCoorBig/80-1][kingCoorBig%8+1])){
+                    return false ;
+                }
+            } catch (Exception e){}
 
+            // King
+            for (int i=-1 ; i <= 1 ; i++){
+                for (int j=-1 ; i<=1 ; j++){
+                    if (i != 0 || j != 0){
+                        try {
+                            if ("a".equals(chessBoard[kingCoorBig/8+1][kingCoorBig%8+j])){
+                                return false ;
+                            }
+                        } catch (Exception e){}
 
+                    }
+
+                }
+            }
+        }
         return true ;
     }
 
