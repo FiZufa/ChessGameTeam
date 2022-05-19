@@ -296,27 +296,35 @@ public class ChessboardMain {
     public static String possibleE(int i) {
         String move = "", oldPiece ;
         int x = i/8, y=i%8 ;
-        for (int j=0 ; j<9 ; j++){
-            if(j != 4) {
-
+        for (int j=-1; j<=1; j+=2) {
+            for (int k=-1; k<=1; k+=2) {
+            
                  //error handling
                 try {
-                    if (Character.isLowerCase(chessBoard[x - 1 + j/3][y - 1 + j%3].charAt(0)) ||
-                            " ".equals(chessBoard[x - 1 + j/3][y - 1 + j%3])) {
-                        oldPiece = chessBoard[x - 1 + j/3][y - 1 + j%3];
+                    if (Character.isLowerCase(chessBoard[x+j][y+k*2].charAt(0)) ||
+                            " ".equals(chessBoard[x+j][y+k*2])) {
+                        oldPiece = chessBoard[x+j][y+k*2];
                         chessBoard[x][y] = " ";
-                        chessBoard[x - 1 + j / 3][y - 1 + j % 3] = "E";
-                        int kingPlace = kingCoorBig;
-                        kingCoorBig = i + (j/3) * 8 + j%3 - 9;
                         if (kingSafe()) {
-                            move = move + x + y + (x - 1 + j/3) + (y - 1 + j%3)+oldPiece;
+                            move = move + x + y + (x+j)+(y+k*2)+oldPiece;
                         }
                         chessBoard[x][y] = "E";
-                        chessBoard[x - 1 + j/3][y - 1 + j%3] = oldPiece;
+                        chessBoard[x+j][y+k*2] = oldPiece;
                         kingCoorBig = kingPlace;
                     }
 
                 } catch (Exception e){}
+                try {
+                    if (Character.isLowerCase(chessBoard[x+j*2][y+k].charAt(0)) || " ".equals(chessBoard[x+j*2][y+k])) {
+                        oldPiece=chessBoard[x+j*2][y+k];
+                        chessBoard[x][y]=" ";
+                        if (kingSafe()) {
+                            move = move +x+y+(x+j*2)+(y+k)+oldPiece;
+                        }
+                        chessBoard[x][y]="K";
+                        chessBoard[x+j*2][y+k]=oldPiece;
+                    }
+                } catch (Exception e) {}
             }
         }
         return move ; // need to add casting
