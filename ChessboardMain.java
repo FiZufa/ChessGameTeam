@@ -14,7 +14,8 @@ public class ChessboardMain {
     } ;
     // rook, knight, bishop, queen, emperor/king, pawn
 
-    static int kingCoorBig, kingCoorSmall ;
+    static int kingCoorBig;
+    static int kingCoorSmall ;
 
     public static void main(String[] args){
 
@@ -43,6 +44,7 @@ public class ChessboardMain {
         return move ; //x2, y1, x2, y2, capturedPieces
      }
 
+    //  ------------------------------------------- P A W N -------------------------------------------------------------------------------
      public static String possibleP(int i) {
         String move=" ", oldPiece;
         int x=i/8, y=i%8;
@@ -118,14 +120,104 @@ public class ChessboardMain {
         } catch (Exception e) {}
         return move;
     }
+    // ----------------------------------------------------- R O O K --------------------------------------------------------------------------------
     public static String possibleR(int i) {
         String move = "" ;
+        String oldPiece ;
+        int temp = 1 ;
+        int x = i/8, y=i%8 ;
+        for (int j=-1 ; j<=1 ;j+=2){
+            try {
+                while (" ".equals(chessBoard[x][y+temp*j])){
+                    oldPiece = chessBoard[x][y+temp*j] ;
+                    chessBoard[x][y] = " " ;
+                    chessBoard[x][y+temp*j] = "R" ;
+                    if (kingSafe()) {
+                        move = move + x + y + x + (y+temp*j)+oldPiece;
+                    }
+                    chessBoard[x][y] = "R" ;
+                    chessBoard[x][y+temp*j] = oldPiece ;
+                    temp++ ;
+                }
+                if (Character.isLowerCase(chessBoard[x][y+temp*j].charAt(0))){
+                    oldPiece = chessBoard[x][y+temp*j] ;
+                    chessBoard[x][y] = " " ;
+                    chessBoard[x][y+temp*j] = "R" ;
+                    if (kingSafe()) {
+                        move = move + x + y + x + (y+temp*j)+oldPiece;
+                    }
+                    chessBoard[x][y] = "R" ;
+                    chessBoard[x][y+temp*j] = oldPiece ;
+                }
+            } catch (Exception e){}
+            temp = 1 ;
+            try {
+                while (" ".equals(chessBoard[x+temp*j][y])){
+                    oldPiece = chessBoard[x+temp*j][y] ;
+                    chessBoard[x][y] = " " ;
+                    chessBoard[x+temp*j][y] = "R" ;
+                    if (kingSafe()) {
+                        move = move + x + y + x + (y+temp*j)+oldPiece;
+                    }
+                    chessBoard[x][y] = "R" ;
+                    chessBoard[x+temp*j][y] = oldPiece ;
+                    temp++ ;
+                }
+                if (Character.isLowerCase(chessBoard[x+temp*j][y].charAt(0))){
+                    oldPiece = chessBoard[x+temp*j][y] ;
+                    chessBoard[x][y] = " " ;
+                    chessBoard[x+temp*j][y] = "R" ;
+                    if (kingSafe()) {
+                        move = move + x + y + x + (y+temp*j)+oldPiece;
+                    }
+                    chessBoard[x][y] = "R" ;
+                    chessBoard[x+temp*j][y] = oldPiece ;
+                }
+            } catch (Exception e){}
+            temp = 1 ;
+        }
         return move ;
     }
+    // ------------------------------------------------------- B I S H O P ----------------------------------------------------------------------------
     public static String possibleB(int i) {
         String move = "" ;
+        String oldPiece ;
+        int x = i/8, y = i%8 ;
+        int temp = 1;
+        for (int j=-1; j<=1; j+=2) {
+            for (int k=-1; k<=1; k+=2) {
+                if (j!=0 || k!=0) {
+                    //error handling
+                    try {
+                        while (" ".equals(chessBoard[x+temp*j][y+temp*k])) {
+                            oldPiece = chessBoard[x+temp*j][y+temp*k];
+                            chessBoard[x][y] = " ";
+                            chessBoard[x+temp*j][y+temp*k] = "B";
+                            if (kingSafe()) {
+                                move = move + x + y + (x+temp*j) + y +oldPiece;
+                            }
+                            chessBoard[x][y] = "B";
+                            chessBoard[x+temp*j][y+temp*k] = oldPiece;
+                            temp++;
+                        }
+                        if (Character.isLowerCase(chessBoard[x+temp*j][y+temp*k].charAt(0))) {
+                            oldPiece=chessBoard[x+temp*j][y+temp*k];
+                            chessBoard[x][y]=" ";
+                            chessBoard[x+temp*j][y+temp*k]="B";
+                            if (kingSafe()) {
+                                move = move + x + y + (x+temp*j) + y +oldPiece;
+                            }
+                            chessBoard[x][y]="B";
+                            chessBoard[x+temp*j][y+temp*k]=oldPiece;
+                        }
+                    } catch (Exception e) {}
+                    temp=1;
+                }
+            }
+        }
         return move ;
     }
+    // ------------------------------------------------ K N I G H T ----------------------------------------------------------------------------------
     public static String possibleK(int i) {
         String move = "" ;
         String oldPiece ;
@@ -160,6 +252,7 @@ public class ChessboardMain {
         }
         return move ;
     }
+    // ----------------------------------------------------------- Q U E E N --------------------------------------------------------------------
     public static String possibleQ(int i) {
         String move = "" ;
         String oldPiece ;
@@ -199,6 +292,7 @@ public class ChessboardMain {
         }
         return move ;
     }
+    // --------------------------------------------------------K I N G -----------------------------------------------------------------------
     public static String possibleE(int i) {
         String move = "", oldPiece ;
         int x = i/8, y=i%8 ;
@@ -229,6 +323,10 @@ public class ChessboardMain {
     }
 
     public static boolean kingSafe(){
+        // bishop
+        int temp = 1 ;
+
+
         return true ;
     }
 
