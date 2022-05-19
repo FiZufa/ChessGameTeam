@@ -29,6 +29,43 @@ public class ChessboardMain {
         System.out.println(possibleMove());
     }
 
+    public static String chessGame (int depth, int beta, int alfa, String moving, int player) {
+        String move = possibleMove() ;
+        if (depth == 0 || move.length() == 0){
+            return moving + rating()*(player*-1) ;
+        }
+        //sort LATER
+        move = sortMoves(move) ;
+        player = 1 - player ;
+        for (int i=0; move.length() ; i+=5){
+            makeMove.substring(i,i+5) ;
+            flipBoard() ;
+            undoMove(move.substring(i, i+5)) ;
+            if (player==0){
+                if(value <= beta){
+                    beta = value ;
+                    if (depth == globalDepth){
+                        moving = returnString.subtring(0,5) ;
+                    }
+                }
+            } else {
+                if (value <= alpha){
+                    alpha = value ;
+                    if (depth == globalDepth){
+                        moving = returnString.subString(0,5) ;
+                    }
+                }
+            }
+
+        }
+        if (player == 0){
+            return moving+beta ;
+        } else {
+            return moving+alpha ;
+        }
+        return "";
+    }
+
     public static String possibleMove(){
         String move = "" ;
         for (int i=0 ; i < 64 ; i++){
@@ -42,6 +79,10 @@ public class ChessboardMain {
             }
         }
         return move ; //x2, y1, x2, y2, capturedPieces
+     }
+
+     public static int rating (){
+        return 0 ;
      }
 
     //  ------------------------------------------- P A W N -------------------------------------------------------------------------------
@@ -157,7 +198,7 @@ public class ChessboardMain {
                     chessBoard[x][y] = " " ;
                     chessBoard[x+temp*j][y] = "R" ;
                     if (kingSafe()) {
-                        move = move + x + y + x + (y+temp*j)+oldPiece;
+                        move = move + x + y + y + (x+temp*j)+oldPiece;
                     }
                     chessBoard[x][y] = "R" ;
                     chessBoard[x+temp*j][y] = oldPiece ;
@@ -168,7 +209,7 @@ public class ChessboardMain {
                     chessBoard[x][y] = " " ;
                     chessBoard[x+temp*j][y] = "R" ;
                     if (kingSafe()) {
-                        move = move + x + y + x + (y+temp*j)+oldPiece;
+                        move = move + x + y + y + (x+temp*j)+oldPiece;
                     }
                     chessBoard[x][y] = "R" ;
                     chessBoard[x+temp*j][y] = oldPiece ;
@@ -194,7 +235,7 @@ public class ChessboardMain {
                             chessBoard[x][y] = " ";
                             chessBoard[x+temp*j][y+temp*k] = "B";
                             if (kingSafe()) {
-                                move = move + x + y + (x+temp*j) + y +oldPiece;
+                                move = move + x + y + (y+temp*k) + y +oldPiece;
                             }
                             chessBoard[x][y] = "B";
                             chessBoard[x+temp*j][y+temp*k] = oldPiece;
@@ -205,7 +246,7 @@ public class ChessboardMain {
                             chessBoard[x][y]=" ";
                             chessBoard[x+temp*j][y+temp*k]="B";
                             if (kingSafe()) {
-                                move = move + x + y + (x+temp*j) + y +oldPiece;
+                                move = move + x + y + (x+temp*j) + (y+temp*k) +oldPiece;
                             }
                             chessBoard[x][y]="B";
                             chessBoard[x+temp*j][y+temp*k]=oldPiece;
@@ -222,7 +263,6 @@ public class ChessboardMain {
         String move = "" ;
         String oldPiece ;
         int x=i/8 , y=i%8 ;
-        int temp = 1 ;
         for (int j=-1 ; j <= 1 ; j+=2){
             for (int k=-1 ; j<=1 ; k+=2){
                 try{
@@ -296,42 +336,40 @@ public class ChessboardMain {
     public static String possibleE(int i) {
         String move = "", oldPiece ;
         int x = i/8, y=i%8 ;
-        for (int j=-1; j<=1; j+=2) {
-            for (int k=-1; k<=1; k+=2) {
-            
-                 //error handling
+        for (int j=0; j<=9; j++) {
+            if (j != 4) {
                 try {
-                    if (Character.isLowerCase(chessBoard[x+j][y+k*2].charAt(0)) ||
-                            " ".equals(chessBoard[x+j][y+k*2])) {
-                        oldPiece = chessBoard[x+j][y+k*2];
-                        chessBoard[x][y] = " ";
-                        if (kingSafe()) {
-                            move = move + x + y + (x+j)+(y+k*2)+oldPiece;
+                    if (Character.isLowerCase(chessBoard[x-1+j/3][y-1+j%3].charAt(0) || " ".equals(chessBoard[x-1+j/3][y-1+j%3]))){
+                        oldPiece = chessBoard[x-1+j/3][y-1+j%3] ;
+                        chessBoard[x][y] = " " ;
+                        chessBoard[x-1+j/3][y-1+j%3] = "E" ;
+                        int kingPlace = kingCoorBig ;
+                        kingCoorBig = i + (j/3)*8 + j%3 - 9 ;
+                        if(kingSafe()){
+                            move = move+x+y(x-1+j/3)+(y-1+j%3)+oldPiece ;
                         }
-                        chessBoard[x][y] = "E";
-                        chessBoard[x+j][y+k*2] = oldPiece;
-                        kingCoorBig = kingPlace;
+                        chessBoard[x][y] = "E" ;
+                        chessBoard[x-1+j/3][y-1+j%3] = oldPiece ;
+                        kingCoorBig = kingPlace ;
                     }
 
                 } catch (Exception e){}
-                try {
-                    if (Character.isLowerCase(chessBoard[x+j*2][y+k].charAt(0)) || " ".equals(chessBoard[x+j*2][y+k])) {
-                        oldPiece=chessBoard[x+j*2][y+k];
-                        chessBoard[x][y]=" ";
-                        if (kingSafe()) {
-                            move = move +x+y+(x+j*2)+(y+k)+oldPiece;
-                        }
-                        chessBoard[x][y]="K";
-                        chessBoard[x+j*2][y+k]=oldPiece;
-                    }
-                } catch (Exception e) {}
             }
+
+                 //error handling
         }
         return move ; // need to add casting
     }
 
+    public static String sortMoves(String move){
+        int[] score = new int[move.length()/5] ;
+
+    }
+
+
+    // --------------------------------- KING SAFE -------------------------------------------------------------------------------------
     public static boolean kingSafe(){
-        // bishop
+        // bishop/queen
         int temp = 1 ;
         for (int i=-1 ; i <= 1 ; i+=2){
             for (int j=-1 ; i<=1 ; j+=2){
