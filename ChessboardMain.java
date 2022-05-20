@@ -16,6 +16,8 @@ public class ChessboardMain {
 
     static int kingCoorBig;
     static int kingCoorSmall ;
+    static int defaultWhite ;
+    static int globalDepth = 4 ;
 
     public static void main(String[] args){
 
@@ -37,7 +39,7 @@ public class ChessboardMain {
         //sort LATER
         move = sortMoves(move) ;
         player = 1 - player ;
-        for (int i=0; move.length() ; i+=5){
+        for (int i=0; i < move.length() ; i+=5){
             makeMove(move.substring(i, i+5));
             flipBoard() ;
             String returnString = chessGame(depth-1, beta, alfa, move.substring(i, i+5), player) ;
@@ -48,14 +50,14 @@ public class ChessboardMain {
                 if(value <= beta){
                     beta = value ;
                     if (depth == globalDepth){
-                        moving = returnString.subtring(0,5) ;
+                        moving = returnString.substring(0,5);
                     }
                 }
             } else {
-                if (value <= alfa){
+                if (value > alfa){
                     alfa = value ;
                     if (depth == globalDepth){
-                        moving = returnString.subString(0,5) ;
+                        moving = returnString.substring(0,5) ;
                     }
                 }
             }
@@ -66,7 +68,7 @@ public class ChessboardMain {
         } else {
             return moving+alfa ;
         }
-        return "";
+
     }
 
     public static void flipBoard(){
@@ -87,28 +89,28 @@ public class ChessboardMain {
         }
         int kingTemp = kingCoorBig;
         kingCoorBig = 63 - kingCoorSmall;
-        kingCoorSmall = 63-kingTemp;
+        kingCoorSmall = 63 - kingTemp;
     }
 
-    public static void undoMove(String moving){
+
+    public static void makeMove(String moving){
         if(moving.charAt(4) != 'P'){
-            chessBoard[Character.getNumericValue(moving.charAt(0))][Character.getNumericValue(moving.charAt(1)] = chessBoard[Character.getNumericValue(moving.charAt(2))][Character.getNumericValue(moving.charAt(3)] ;
-            chessBoard[Character.getNumericValue(moving.charAt(2))][Character.getNumericValue(moving.charAt(3)] = String.valueOf(moving.charAt(4)) ;
+            chessBoard[Character.getNumericValue(moving.charAt(2))][Character.getNumericValue(moving.charAt(3))] = chessBoard[Character.getNumericValue(moving.charAt(0))][Character.getNumericValue(moving.charAt(1))] ;
+            chessBoard[Character.getNumericValue(moving.charAt(0))][Character.getNumericValue(moving.charAt(1))] = " " ;
         } else {
             // pawn promotion
             chessBoard[1][Character.getNumericValue(moving.charAt(0))] = " " ;
             chessBoard[0][Character.getNumericValue(moving.charAt(1))] = String.valueOf(moving.charAt(3));
         }
     }
-
-    public static void makeMove(String moving){
+    public static void undoMove(String moving){
         if(moving.charAt(4) != 'P'){
-            chessBoard[Character.getNumericValue(moving.charAt(2))][Character.getNumericValue(moving.charAt(3)] = chessBoard[Character.getNumericValue(moving.charAt(0))][Character.getNumericValue(moving.charAt(1)] ;
-            chessBoard[Character.getNumericValue(moving.charAt(0))][Character.getNumericValue(moving.charAt(1)] = " " ;
+            chessBoard[Character.getNumericValue(moving.charAt(0))][Character.getNumericValue(moving.charAt(1))] = chessBoard[Character.getNumericValue(moving.charAt(2))][Character.getNumericValue(moving.charAt(3))] ;
+            chessBoard[Character.getNumericValue(moving.charAt(2))][Character.getNumericValue(moving.charAt(3))] = String.valueOf(moving.charAt(4)) ;
         } else {
             // pawn promotion
-            chessBoard[1][Character.getNumericValue(moving.charAt(0))] = " " ;
-            chessBoard[0][Character.getNumericValue(moving.charAt(1))] = String.valueOf(moving.charAt(3));
+            chessBoard[1][Character.getNumericValue(moving.charAt(0))] = "P" ;
+            chessBoard[0][Character.getNumericValue(moving.charAt(1))] = String.valueOf(moving.charAt(2));
         }
     }
     public static String possibleMove(){
@@ -379,19 +381,20 @@ public class ChessboardMain {
     }
     // --------------------------------------------------------K I N G -----------------------------------------------------------------------
     public static String possibleE(int i) {
-        String move = "", oldPiece ;
+        String move = "" ;
+        String oldPiece ;
         int x = i/8, y=i%8 ;
         for (int j=0; j<=9; j++) {
             if (j != 4) {
                 try {
-                    if (Character.isLowerCase(chessBoard[x-1+j/3][y-1+j%3].charAt(0) || " ".equals(chessBoard[x-1+j/3][y-1+j%3]))){
+                    if (Character.isLowerCase(chessBoard[x-1+j/3][y-1+j%3].charAt(0)) || " ".equals(chessBoard[x-1+j/3][y-1+j%3])){
                         oldPiece = chessBoard[x-1+j/3][y-1+j%3] ;
                         chessBoard[x][y] = " " ;
                         chessBoard[x-1+j/3][y-1+j%3] = "E" ;
                         int kingPlace = kingCoorBig ;
                         kingCoorBig = i + (j/3)*8 + j%3 - 9 ;
                         if(kingSafe()){
-                            move = move+x+y(x-1+j/3)+(y-1+j%3)+oldPiece ;
+                            move = move + x +y + (x-1+j/3) + (y-1+j%3) + oldPiece ;
                         }
                         chessBoard[x][y] = "E" ;
                         chessBoard[x-1+j/3][y-1+j%3] = oldPiece ;
@@ -408,7 +411,7 @@ public class ChessboardMain {
 
     public static String sortMoves(String move){
         int[] score = new int[move.length()/5] ;
-
+        return  " " ;
     }
 
 

@@ -14,12 +14,12 @@ public class UserInterface extends JPanel implements MouseListener, MouseMotionL
     static int boardSize = 32 ;
     public void paintComponent(Graphics block){
         super.paintComponent(block);
-        this.setBackground(Color.white);
+        this.setBackground(Color.yellow);
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
         for (int i=0 ; i < 64 ; i+=2){
             block.setColor(new Color(255,200,100));
-            block.fillRect((i%8 + (1/8)%2)*boardSize, (i/8)*boardSize,boardSize,boardSize);
+            block.fillRect((i%8 + (i/8)%2)*boardSize, (i/8)*boardSize,boardSize,boardSize);
             block.setColor((new Color(150, 50, 30)));
             block.fillRect(((i+1)%8 - ((i+1)/8)%2)*boardSize, ((i+1)/8)*boardSize,boardSize,boardSize);
         }
@@ -87,7 +87,7 @@ public class UserInterface extends JPanel implements MouseListener, MouseMotionL
                 if (userPossible.replaceAll(moveDrag, "").length() < userPossible.length()){
                     ChessboardMain.makeMove(moveDrag) ; //??????????
                     ChessboardMain.flipBoard() ;
-                    ChessboardMain.makeMove(chessGame(ChessboardMain.globalDepth, 1000000, -1000000, "", 0)) ;
+                    ChessboardMain.makeMove(ChessboardMain.chessGame(ChessboardMain.globalDepth, 1000000, -1000000, "", 0));
                     ChessboardMain.flipBoard() ;
                     repaint() ;
                 }
