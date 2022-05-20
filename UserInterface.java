@@ -87,7 +87,7 @@ public class UserInterface extends JPanel implements MouseListener, MouseMotionL
                 if (userPossible.replaceAll(moveDrag, "").length() < userPossible.length()){
                     ChessboardMain.makeMove(moveDrag) ; //??????????
                     ChessboardMain.flipBoard() ;
-                    ChessboardMain.makeMove(alphaBeta(ChessboardMain.globalDepth, 1000000, -1000000, "", 0)) ;
+                    ChessboardMain.makeMove(chessGame(ChessboardMain.globalDepth, 1000000, -1000000, "", 0)) ;
                     ChessboardMain.flipBoard() ;
                     repaint() ;
                 }

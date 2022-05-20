@@ -32,15 +32,18 @@ public class ChessboardMain {
     public static String chessGame (int depth, int beta, int alfa, String moving, int player) {
         String move = possibleMove() ;
         if (depth == 0 || move.length() == 0){
-            return moving + rating()*(player*-1) ;
+            return moving + (Rate.rate(move.length(), depth)*(player*2-1)) ;
         }
         //sort LATER
         move = sortMoves(move) ;
         player = 1 - player ;
         for (int i=0; move.length() ; i+=5){
-            makeMove.substring(i,i+5) ;
+            makeMove(move.substring(i, i+5));
             flipBoard() ;
-            undoMove(move.substring(i, i+5)) ;
+            String returnString = chessGame(depth-1, beta, alfa, move.substring(i, i+5), player) ;
+            int value = Integer.valueOf(returnString.substring(5)) ;
+            flipBoard();
+            undoMove(move.substring(i, i+5));
             if (player==0){
                 if(value <= beta){
                     beta = value ;
@@ -49,8 +52,8 @@ public class ChessboardMain {
                     }
                 }
             } else {
-                if (value <= alpha){
-                    alpha = value ;
+                if (value <= alfa){
+                    alfa = value ;
                     if (depth == globalDepth){
                         moving = returnString.subString(0,5) ;
                     }
@@ -61,11 +64,53 @@ public class ChessboardMain {
         if (player == 0){
             return moving+beta ;
         } else {
-            return moving+alpha ;
+            return moving+alfa ;
         }
         return "";
     }
 
+    public static void flipBoard(){
+        String temp;
+        for (int i=0 ; i < 32 ; i++) {
+            int x=i/8, y=i%8;
+            if (Character.isUpperCase(chessBoard[x][y].charAt(0))) {
+                temp = chessBoard[x][y].toLowerCase() ;
+            } else {
+                temp = chessBoard[x][y].toUpperCase();
+            }
+            if (Character.isUpperCase(chessBoard[7-x][7-y].charAt(0))) {
+                chessBoard[x][y]=chessBoard[7-x][7-y].toLowerCase();
+            } else {
+                chessBoard[x][y]=chessBoard[7-x][7-y].toUpperCase();
+            }
+            chessBoard[7-x][7-y]=temp;
+        }
+        int kingTemp = kingCoorBig;
+        kingCoorBig = 63 - kingCoorSmall;
+        kingCoorSmall = 63-kingTemp;
+    }
+
+    public static void undoMove(String moving){
+        if(moving.charAt(4) != 'P'){
+            chessBoard[Character.getNumericValue(moving.charAt(0))][Character.getNumericValue(moving.charAt(1)] = chessBoard[Character.getNumericValue(moving.charAt(2))][Character.getNumericValue(moving.charAt(3)] ;
+            chessBoard[Character.getNumericValue(moving.charAt(2))][Character.getNumericValue(moving.charAt(3)] = String.valueOf(moving.charAt(4)) ;
+        } else {
+            // pawn promotion
+            chessBoard[1][Character.getNumericValue(moving.charAt(0))] = " " ;
+            chessBoard[0][Character.getNumericValue(moving.charAt(1))] = String.valueOf(moving.charAt(3));
+        }
+    }
+
+    public static void makeMove(String moving){
+        if(moving.charAt(4) != 'P'){
+            chessBoard[Character.getNumericValue(moving.charAt(2))][Character.getNumericValue(moving.charAt(3)] = chessBoard[Character.getNumericValue(moving.charAt(0))][Character.getNumericValue(moving.charAt(1)] ;
+            chessBoard[Character.getNumericValue(moving.charAt(0))][Character.getNumericValue(moving.charAt(1)] = " " ;
+        } else {
+            // pawn promotion
+            chessBoard[1][Character.getNumericValue(moving.charAt(0))] = " " ;
+            chessBoard[0][Character.getNumericValue(moving.charAt(1))] = String.valueOf(moving.charAt(3));
+        }
+    }
     public static String possibleMove(){
         String move = "" ;
         for (int i=0 ; i < 64 ; i++){
