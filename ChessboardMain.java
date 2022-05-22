@@ -26,6 +26,7 @@ public class ChessboardMain {
 
         UserInterface userInterface = new UserInterface();
         frame.add(userInterface) ;
+        frame.addMouseMotionListener(new MouseMotionListener);
         frame.addMouseListener(new MouseListener);
         frame.setSize(700,700) ;
         frame.setVisible(true);
