@@ -152,7 +152,6 @@ public class Rate {
         return count ;
     }
 
-
     public static int rateMove(){
         return 0 ;
     }
@@ -180,6 +179,3 @@ public class Rate {
     }
 
     }
-
-
-
