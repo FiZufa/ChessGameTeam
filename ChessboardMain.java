@@ -1,7 +1,7 @@
 import javax.swing.*;
 
 public class ChessboardMain {
-
+    public static LinkedList<Piece> ps =new LinkedList<>();
     static String chessBoard[][] = {
             {"r", "k", "b", "q", "e", "b", "k", "r"},
             {"p", "p", "p", "p", "p", "p", "p", "p"},
@@ -18,7 +18,16 @@ public class ChessboardMain {
     static int kingCoorSmall ;
     static int defaultWhite ;
     static int globalDepth = 4 ;
-
+    public static Piece getPiece(int x, int y) {
+        int xp = x/64;
+        int yp = x/64;
+        for (Piece p : ps){
+            if (p.xp==xp&&p.yp==yp){
+                return p;
+            }
+        }
+        return null;
+    }
     public static void main(String[] args){
 
         JFrame frame = new JFrame("Chess Game");
@@ -26,8 +35,45 @@ public class ChessboardMain {
 
         UserInterface userInterface = new UserInterface();
         frame.add(userInterface) ;
-        frame.addMouseMotionListener(new MouseMotionListener);
-        frame.addMouseListener(new MouseListener);
+        frame.addMouseMotionListener(new MouseMotionListener() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                System.out.println(getPiece(e.getX(),e.getY()));
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+            }
+        });
+        frame.addMouseListener(new MouseListener(){
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+        
         frame.setSize(700,700) ;
         frame.setVisible(true);
         System.out.println(possibleMove());
