@@ -1,67 +1,73 @@
-public class Rating {
-    static int pawnBoard[][]={//attribute to http://chessprogramming.wikispaces.com/Simplified+evaluation+function
-        { 0,  0,  0,  0,  0,  0,  0,  0},
-        {50, 50, 50, 50, 50, 50, 50, 50},
-        {10, 10, 20, 30, 30, 20, 10, 10},
-        { 5,  5, 10, 25, 25, 10,  5,  5},
-        { 0,  0,  0, 20, 20,  0,  0,  0},
-        { 5, -5,-10,  0,  0,-10, -5,  5},
-        { 5, 10, 10,-20,-20, 10, 10,  5},
-        { 0,  0,  0,  0,  0,  0,  0,  0}};
+public class Rate {
+    static int pawnBoard[][]={
+            { 0,  0,  0,  0,  0,  0,  0,  0},
+            {50, 50, 50, 50, 50, 50, 50, 50},
+            {10, 10, 20, 30, 30, 20, 10, 10},
+            { 5,  5, 10, 25, 25, 10,  5,  5},
+            { 0,  0,  0, 20, 20,  0,  0,  0},
+            { 5, -5,-10,  0,  0,-10, -5,  5},
+            { 5, 10, 10,-20,-20, 10, 10,  5},
+            { 0,  0,  0,  0,  0,  0,  0,  0}
+    };
     static int rookBoard[][]={
-        { 0,  0,  0,  0,  0,  0,  0,  0},
-        { 5, 10, 10, 10, 10, 10, 10,  5},
-        {-5,  0,  0,  0,  0,  0,  0, -5},
-        {-5,  0,  0,  0,  0,  0,  0, -5},
-        {-5,  0,  0,  0,  0,  0,  0, -5},
-        {-5,  0,  0,  0,  0,  0,  0, -5},
-        {-5,  0,  0,  0,  0,  0,  0, -5},
-        { 0,  0,  0,  5,  5,  0,  0,  0}};
+            { 0,  0,  0,  0,  0,  0,  0,  0},
+            { 5, 10, 10, 10, 10, 10, 10,  5},
+            {-5,  0,  0,  0,  0,  0,  0, -5},
+            {-5,  0,  0,  0,  0,  0,  0, -5},
+            {-5,  0,  0,  0,  0,  0,  0, -5},
+            {-5,  0,  0,  0,  0,  0,  0, -5},
+            {-5,  0,  0,  0,  0,  0,  0, -5},
+            { 0,  0,  0,  5,  5,  0,  0,  0}
+    };
     static int knightBoard[][]={
-        {-50,-40,-30,-30,-30,-30,-40,-50},
-        {-40,-20,  0,  0,  0,  0,-20,-40},
-        {-30,  0, 10, 15, 15, 10,  0,-30},
-        {-30,  5, 15, 20, 20, 15,  5,-30},
-        {-30,  0, 15, 20, 20, 15,  0,-30},
-        {-30,  5, 10, 15, 15, 10,  5,-30},
-        {-40,-20,  0,  5,  5,  0,-20,-40},
-        {-50,-40,-30,-30,-30,-30,-40,-50}};
+            {-50,-40,-30,-30,-30,-30,-40,-50},
+            {-40,-20,  0,  0,  0,  0,-20,-40},
+            {-30,  0, 10, 15, 15, 10,  0,-30},
+            {-30,  5, 15, 20, 20, 15,  5,-30},
+            {-30,  0, 15, 20, 20, 15,  0,-30},
+            {-30,  5, 10, 15, 15, 10,  5,-30},
+            {-40,-20,  0,  5,  5,  0,-20,-40},
+            {-50,-40,-30,-30,-30,-30,-40,-50}};
     static int bishopBoard[][]={
-        {-20,-10,-10,-10,-10,-10,-10,-20},
-        {-10,  0,  0,  0,  0,  0,  0,-10},
-        {-10,  0,  5, 10, 10,  5,  0,-10},
-        {-10,  5,  5, 10, 10,  5,  5,-10},
-        {-10,  0, 10, 10, 10, 10,  0,-10},
-        {-10, 10, 10, 10, 10, 10, 10,-10},
-        {-10,  5,  0,  0,  0,  0,  5,-10},
-        {-20,-10,-10,-10,-10,-10,-10,-20}};
+            {-20,-10,-10,-10,-10,-10,-10,-20},
+            {-10,  0,  0,  0,  0,  0,  0,-10},
+            {-10,  0,  5, 10, 10,  5,  0,-10},
+            {-10,  5,  5, 10, 10,  5,  5,-10},
+            {-10,  0, 10, 10, 10, 10,  0,-10},
+            {-10, 10, 10, 10, 10, 10, 10,-10},
+            {-10,  5,  0,  0,  0,  0,  5,-10},
+            {-20,-10,-10,-10,-10,-10,-10,-20}
+    };
     static int queenBoard[][]={
-        {-20,-10,-10, -5, -5,-10,-10,-20},
-        {-10,  0,  0,  0,  0,  0,  0,-10},
-        {-10,  0,  5,  5,  5,  5,  0,-10},
-        { -5,  0,  5,  5,  5,  5,  0, -5},
-        {  0,  0,  5,  5,  5,  5,  0, -5},
-        {-10,  5,  5,  5,  5,  5,  0,-10},
-        {-10,  0,  5,  0,  0,  0,  0,-10},
-        {-20,-10,-10, -5, -5,-10,-10,-20}};
+            {-20,-10,-10, -5, -5,-10,-10,-20},
+            {-10,  0,  0,  0,  0,  0,  0,-10},
+            {-10,  0,  5,  5,  5,  5,  0,-10},
+            { -5,  0,  5,  5,  5,  5,  0, -5},
+            {  0,  0,  5,  5,  5,  5,  0, -5},
+            {-10,  5,  5,  5,  5,  5,  0,-10},
+            {-10,  0,  5,  0,  0,  0,  0,-10},
+            {-20,-10,-10, -5, -5,-10,-10,-20}
+    };
     static int kingMidBoard[][]={
-        {-30,-40,-40,-50,-50,-40,-40,-30},
-        {-30,-40,-40,-50,-50,-40,-40,-30},
-        {-30,-40,-40,-50,-50,-40,-40,-30},
-        {-30,-40,-40,-50,-50,-40,-40,-30},
-        {-20,-30,-30,-40,-40,-30,-30,-20},
-        {-10,-20,-20,-20,-20,-20,-20,-10},
-        { 20, 20,  0,  0,  0,  0, 20, 20},
-        { 20, 30, 10,  0,  0, 10, 30, 20}};
+            {-30,-40,-40,-50,-50,-40,-40,-30},
+            {-30,-40,-40,-50,-50,-40,-40,-30},
+            {-30,-40,-40,-50,-50,-40,-40,-30},
+            {-30,-40,-40,-50,-50,-40,-40,-30},
+            {-20,-30,-30,-40,-40,-30,-30,-20},
+            {-10,-20,-20,-20,-20,-20,-20,-10},
+            { 20, 20,  0,  0,  0,  0, 20, 20},
+            { 20, 30, 10,  0,  0, 10, 30, 20}
+    };
     static int kingEndBoard[][]={
-        {-50,-40,-30,-20,-20,-30,-40,-50},
-        {-30,-20,-10,  0,  0,-10,-20,-30},
-        {-30,-10, 20, 30, 30, 20,-10,-30},
-        {-30,-10, 30, 40, 40, 30,-10,-30},
-        {-30,-10, 30, 40, 40, 30,-10,-30},
-        {-30,-10, 20, 30, 30, 20,-10,-30},
-        {-30,-30,  0,  0,  0,  0,-30,-30},
-        {-50,-30,-30,-30,-30,-30,-30,-50}};
+            {-50,-40,-30,-20,-20,-30,-40,-50},
+            {-30,-20,-10,  0,  0,-10,-20,-30},
+            {-30,-10, 20, 30, 30, 20,-10,-30},
+            {-30,-10, 30, 40, 40, 30,-10,-30},
+            {-30,-10, 30, 40, 40, 30,-10,-30},
+            {-30,-10, 20, 30, 30, 20,-10,-30},
+            {-30,-30,  0,  0,  0,  0,-30,-30},
+            {-50,-30,-30,-30,-30,-30,-30,-50}
+    };
     public static int rating(int list, int depth) {
         int counter=0, material=rateMaterial();
         counter+=rateAttack();
@@ -79,22 +85,22 @@ public class Rating {
     }
     public static int rateAttack() {
         int counter=0;
-        int tempPositionC=ChessboardMain.kingPositionC;
+        int tempPositionC=ChessboardMain.kingCoorBig;
         for (int i=0;i<64;i++) {
             switch (ChessboardMain.chessBoard[i/8][i%8]) {
-                case "P": {ChessboardMain.kingPositionC=i; if (!ChessboardMain.kingSafe()) {counter-=64;}}
-                    break;
-                case "R": {ChessboardMain.kingPositionC=i; if (!ChessboardMain.kingSafe()) {counter-=500;}}
-                    break;
-                case "K": {ChessboardMain.kingPositionC=i; if (!ChessboardMain.kingSafe()) {counter-=300;}}
-                    break;
-                case "B": {ChessboardMain.kingPositionC=i; if (!ChessboardMain.kingSafe()) {counter-=300;}}
-                    break;
-                case "Q": {ChessboardMain.kingPositionC=i; if (!ChessboardMain.kingSafe()) {counter-=900;}}
-                    break;
+                case "P": {ChessboardMain.kingCoorBig =i; if (!ChessboardMain.kingSafe()) {counter-=64;}}
+                break;
+                case "R": {ChessboardMain.kingCoorBig =i; if (!ChessboardMain.kingSafe()) {counter-=500;}}
+                break;
+                case "K": {ChessboardMain.kingCoorBig =i; if (!ChessboardMain.kingSafe()) {counter-=300;}}
+                break;
+                case "B": {ChessboardMain.kingCoorBig =i; if (!ChessboardMain.kingSafe()) {counter-=300;}}
+                break;
+                case "Q": {ChessboardMain.kingCoorBig =i; if (!ChessboardMain.kingSafe()) {counter-=900;}}
+                break;
             }
         }
-        ChessboardMain.kingPositionC=tempPositionC;
+        ChessboardMain.kingCoorBig =tempPositionC;
         if (!ChessboardMain.kingSafe()) {counter-=200;}
         return counter/2;
     }
@@ -147,8 +153,8 @@ public class Rating {
                     break;
                 case "Q": counter+=queenBoard[i/8][i%8];
                     break;
-                case "E": if (material>=1750) {counter+=kingMidBoard[i/8][i%8]; counter+=ChessboardMain.posibleE(ChessboardMain.kingPositionC).length()*10;} else
-                {counter+=kingEndBoard[i/8][i%8]; counter+=ChessboardMain.posibleE(ChessboardMain.kingPositionC).length()*30;}
+                case "E": if (material>=1750) {counter+=kingMidBoard[i/8][i%8]; counter+=ChessboardMain.posibleE(ChessboardMain.kingCoorBig).length()*10;} else
+                {counter+=kingEndBoard[i/8][i%8]; counter+=ChessboardMain.posibleE(ChessboardMain.kingCoorBig).length()*30;}
                     break;
             }
         }
