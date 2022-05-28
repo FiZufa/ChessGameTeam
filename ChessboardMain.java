@@ -431,9 +431,23 @@ public class ChessboardMain {
 
     public static String sortMoves(String move){
         int[] score = new int[move.length()/5] ;
-        return  " " ;
+        for (int i=0;i<move.length();i+=5) {
+            makeMove(move.substring(i, i+5));
+            score[i/5]=-Rate.rate(-1, 0);
+            undoMove(move.substring(i, i+5));
+        }
+        String newListA="", newListB=move;
+        for (int i=0;i<Math.min(6, move.length()/5);i++) {//first few moves only
+            int max=-1000000, maxLocation=0;
+            for (int j=0;j<move.length()/5;j++) {
+                if (score[j]>max) {max=score[j]; maxLocation=j;}
+            }
+            score[maxLocation]=-1000000;
+            newListA+=move.substring(maxLocation*5,maxLocation*5+5);
+            newListB=newListB.replace(move.substring(maxLocation*5,maxLocation*5+5), "");
+        }
+        return newListA+newListB;
     }
-
 
     // --------------------------------- KING SAFE -------------------------------------------------------------------------------------
     public static boolean kingSafe(){
