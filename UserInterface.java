@@ -14,7 +14,7 @@ public class UserInterface extends JPanel implements MouseListener, MouseMotionL
     static int boardSize = 32 ;
     public void paintComponent(Graphics block){
         super.paintComponent(block);
-        this.setBackground(Color.yellow);
+        //this.setBackground(Color.yellow);
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
        for (int i=0 ; i < 64 ; i+=2){
@@ -32,12 +32,12 @@ public class UserInterface extends JPanel implements MouseListener, MouseMotionL
             switch (ChessboardMain.chessBoard[i/8][i%8]) {
                 case "P" : j=5 ; k=0 ; break ;
                 case "p" : j=5 ; k=1 ; break ;
-                case "R" : j=4 ; k=0 ; break ;
-                case "r" : j=4 ; k=1 ; break ;
-                case "K" : j=3 ; k=0 ; break ;
-                case "k" : j=3 ; k=1 ; break ;
-                case "B" : j=2 ; k=0 ; break ;
-                case "b" : j=2 ; k=1 ; break ;
+                case "R" : j=2 ; k=0 ; break ;
+                case "r" : j=2 ; k=1 ; break ;
+                case "K" : j=4 ; k=0 ; break ;
+                case "k" : j=4 ; k=1 ; break ;
+                case "B" : j=3 ; k=0 ; break ;
+                case "b" : j=3 ; k=1 ; break ;
                 case "Q" : j=1 ; k=0 ; break ;
                 case "q" : j=1 ; k=1 ; break ;
                 case "E" : j=0 ; k=0 ; break ;
