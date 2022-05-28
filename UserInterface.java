@@ -17,14 +17,14 @@ public class UserInterface extends JPanel implements MouseListener, MouseMotionL
         this.setBackground(Color.yellow);
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
-        for (int i=0 ; i < 64 ; i+=2){
-            block.setColor(new Color(255,200,100));
+       for (int i=0 ; i < 64 ; i+=2){
+            block.setColor(Color.PINK);
             block.fillRect((i%8 + (i/8)%2)*boardSize, (i/8)*boardSize,boardSize,boardSize);
-            block.setColor((new Color(150, 50, 30)));
+            block.setColor(Color.white);
             block.fillRect(((i+1)%8 - ((i+1)/8)%2)*boardSize, ((i+1)/8)*boardSize,boardSize,boardSize);
         }
         Image ChessPiecess ;
-        ChessPiecess = new ImageIcon("piecesOfChess.png").getImage() ;
+        ChessPiecess = new ImageIcon("chess.png").getImage() ;
 
         for (int i=0 ; i< 64 ; i++){
             int j = -1 ;
@@ -32,19 +32,20 @@ public class UserInterface extends JPanel implements MouseListener, MouseMotionL
             switch (ChessboardMain.chessBoard[i/8][i%8]) {
                 case "P" : j=5 ; k=0 ; break ;
                 case "p" : j=5 ; k=1 ; break ;
-                case "R" : j=2 ; k=0 ; break ;
-                case "r" : j=2 ; k=1 ; break ;
-                case "K" : j=4 ; k=0 ; break ;
-                case "k" : j=4 ; k=1 ; break ;
-                case "B" : j=3 ; k=0 ; break ;
-                case "b" : j=3 ; k=1 ; break ;
+                case "R" : j=4 ; k=0 ; break ;
+                case "r" : j=4 ; k=1 ; break ;
+                case "K" : j=3 ; k=0 ; break ;
+                case "k" : j=3 ; k=1 ; break ;
+                case "B" : j=2 ; k=0 ; break ;
+                case "b" : j=2 ; k=1 ; break ;
                 case "Q" : j=1 ; k=0 ; break ;
                 case "q" : j=1 ; k=1 ; break ;
                 case "E" : j=0 ; k=0 ; break ;
                 case "e" : j=0 ; k=1 ; break ;
             }
             if (j != -1 && k!= -1){
-                block.drawImage(ChessPiecess, (i%8)*boardSize, (i/8)*boardSize, (i%8+1)*boardSize, (i/8+1)*boardSize, j*64, k*64, (j+1)*64, (k+1)*64, this) ;
+               block.drawImage(ChessPiecess, (i%8)*boardSize, (i/8)*boardSize, (i%8+1)*boardSize, (i/8+1)*boardSize, j*200, k*200, (j+1)*200, (k+1)*200, this) ;
+              
             }
         }
         /*
