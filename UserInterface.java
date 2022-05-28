@@ -58,12 +58,10 @@ public class UserInterface extends JPanel implements MouseListener, MouseMotionL
         ChessPiecess = new ImageIcon("ChessPiecess.png").getImage() ;
         block.drawImage(ChessPiecess, x, 0, x+100, 100, x, 0, x+100, 100, this) ; */
     }
-
+    @Override
     public void mouseMoved(MouseEvent event){
-        x = event.getX();
-        y= event.getY();
-        repaint();
     }
+    @Override
     public void mousePressed(MouseEvent event){
         if(event.getX() < 8*boardSize && event.getY() < 8*boardSize){
             userHandX = event.getX() ;
@@ -94,19 +92,14 @@ public class UserInterface extends JPanel implements MouseListener, MouseMotionL
                 }
 
             }
-            repaint();
         }
     }
-    public void mouseClicked(MouseEvent event){
-
-    }
-    public void mouseDragged(MouseEvent event){
-
-    }
-    public void mouseEntered(MouseEvent event){
-
-    }
-    public void mouseExited(MouseEvent event){
-
-    }
+    @Override
+    public void mouseClicked(MouseEvent e) {}
+    @Override
+    public void mouseDragged(MouseEvent e) {}
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+    @Override
+    public void mouseExited(MouseEvent e) {}
 }
