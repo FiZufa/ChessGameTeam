@@ -20,13 +20,14 @@ public class ChessboardMain {
     
     public static void main(String[] args){
 
-        JFrame frame = new JFrame("Chess Game");
+        JFrame frame = new JFrame("CHESS GAME");
+        frame.setSize(700, 700) ;
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         UserInterface userInterface = new UserInterface();
         frame.add(userInterface) ;
-        frame.setSize(273, 296) ;
         frame.setVisible(true);
+        System.out.println(sortMoves(possibleMove()));
         System.out.println(sortMoves(posibleMoves()));
         Object[] option={"Computer","Human"};
         humanAsWhite=JOptionPane.showOptionDialog(null, "Who should play first?", "ABC Options", JOptionPane.YES_NO_OPTION,
