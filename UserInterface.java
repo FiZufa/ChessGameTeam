@@ -16,7 +16,7 @@ public class UserInterface extends JPanel implements MouseListener, MouseMotionL
             block.fillRect(((i+1)%8-((i+1)/8)%2)*squareSize, ((i+1)/8)*squareSize, squareSize, squareSize);
         }
         Image chessPiecesImage;
-        chessPiecesImage=new ImageIcon("D:\\chess.png").getImage();
+        chessPiecesImage=new ImageIcon("chess.png").getImage();
         for (int i=0;i<64;i++) {
             int j=-1,k=-1;
             switch (ChessboardMain.chessBoard[i/8][i%8]) {
