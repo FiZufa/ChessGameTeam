@@ -91,7 +91,6 @@ public class UserInterface extends JPanel implements MouseListener, MouseMotionL
                     ChessboardMain.flipBoard() ;
                     repaint() ;
                 }
-
             }
         }
     }
