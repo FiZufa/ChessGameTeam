@@ -331,7 +331,7 @@ public class ChessboardMain {
         String oldPiece ;
         int x=i/8 , y=i%8 ;
         for (int j=-1 ; j <= 1 ; j+=2){
-            for (int k=-1 ; j<=1 ; k+=2){
+            for (int k=-1 ; k<=1 ; k+=2){
                 try{
                     if ( Character.isLowerCase(chessBoard[x+j][y+k*2].charAt(0))|| " ".equals((chessBoard[x+j][y+k*2]))){
                         oldPiece = chessBoard[x+j][y+k*2] ;
@@ -404,7 +404,7 @@ public class ChessboardMain {
         String move = "" ;
         String oldPiece ;
         int x = i/8, y=i%8 ;
-        for (int j=0; j<=9; j++) {
+        for (int j=0; j<9; j++) {
             if (j != 4) {
                 try {
                     if (Character.isLowerCase(chessBoard[x-1+j/3][y-1+j%3].charAt(0)) || " ".equals(chessBoard[x-1+j/3][y-1+j%3])){
