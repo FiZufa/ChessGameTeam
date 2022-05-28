@@ -137,7 +137,7 @@ public class ChessboardMain {
         String move = "" ;
         for (int i=0 ; i < 64 ; i++){
             switch (chessBoard[i/8][i%8]) {
-                case "p" : move += possibleP(i) ; break ;
+                case "P" : move += possibleP(i) ; break ;
                 case "R" : move += possibleR(i) ; break ;
                 case "K" : move += possibleK(i) ; break ;
                 case "B" : move += possibleB(i) ; break ;
