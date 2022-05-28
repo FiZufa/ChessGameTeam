@@ -1,3 +1,4 @@
+import java.util.*;
 import javax.swing.*;
 
 public class ChessboardMain {
@@ -15,6 +16,8 @@ public class ChessboardMain {
 
     static int kingCoorBig;
     static int kingCoorSmall ;
+    static int humanAsWhite=-1;//1=human as white, 0=human as black
+    
     static int defaultWhite ;
     static int globalDepth = 4 ;
     
@@ -28,17 +31,16 @@ public class ChessboardMain {
         frame.add(userInterface) ;
         frame.setVisible(true);
         System.out.println(sortMoves(possibleMove()));
-        System.out.println(sortMoves(posibleMoves()));
         Object[] option={"Computer","Human"};
         humanAsWhite=JOptionPane.showOptionDialog(null, "Who should play first?", "ABC Options", JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
         if (humanAsWhite==0) {
             long startTime=System.currentTimeMillis();
-            makeMove(alphaBeta(globalDepth, 1000000, -1000000, "", 0));
+            makeMove(chessGame(globalDepth, 1000000, -1000000, "", 0));
             long endTime=System.currentTimeMillis();
             System.out.println("That took "+(endTime-startTime)+" milliseconds");
             flipBoard();
-            f.repaint();
+            frame.repaint();
         }
         makeMove("7655 ");
         undoMove("7655 ");
