@@ -69,6 +69,7 @@ public class UserInterface extends JPanel implements MouseListener, MouseMotionL
             repaint();
         }
     }
+    @Override
     public void mouseReleased(MouseEvent event){
         if(event.getX() < 8*boardSize && event.getY() < 8*boardSize){
             newUserHandX = event.getX() ;
