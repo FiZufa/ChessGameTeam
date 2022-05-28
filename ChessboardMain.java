@@ -78,6 +78,8 @@ public class ChessboardMain {
                         moving = returnString.substring(0,5) ;
                     }
                 }
+            } if (alfa>=beta) {
+                if (player==0) {return moving+beta;} else {return move+alfa;}
             }
 
         }
