@@ -117,6 +117,9 @@ public class ChessboardMain {
         if(moving.charAt(4) != 'P'){
             chessBoard[Character.getNumericValue(moving.charAt(2))][Character.getNumericValue(moving.charAt(3))] = chessBoard[Character.getNumericValue(moving.charAt(0))][Character.getNumericValue(moving.charAt(1))] ;
             chessBoard[Character.getNumericValue(moving.charAt(0))][Character.getNumericValue(moving.charAt(1))] = " " ;
+            if ("E".equals(chessBoard[Character.getNumericValue(moving.charAt(2))][Character.getNumericValue(moving.charAt(3))])) {
+                kingCoorBig=8*Character.getNumericValue(moving.charAt(2))+Character.getNumericValue(moving.charAt(3));
+            }
         } else {
             // pawn promotion
             chessBoard[1][Character.getNumericValue(moving.charAt(0))] = " " ;
@@ -127,6 +130,9 @@ public class ChessboardMain {
         if(moving.charAt(4) != 'P'){
             chessBoard[Character.getNumericValue(moving.charAt(0))][Character.getNumericValue(moving.charAt(1))] = chessBoard[Character.getNumericValue(moving.charAt(2))][Character.getNumericValue(moving.charAt(3))] ;
             chessBoard[Character.getNumericValue(moving.charAt(2))][Character.getNumericValue(moving.charAt(3))] = String.valueOf(moving.charAt(4)) ;
+            if ("E".equals(chessBoard[Character.getNumericValue(moving.charAt(0))][Character.getNumericValue(moving.charAt(1))])) {
+                kingCoorBig=8*Character.getNumericValue(moving.charAt(0))+Character.getNumericValue(moving.charAt(1));
+            }
         } else {
             // pawn promotion
             chessBoard[1][Character.getNumericValue(moving.charAt(0))] = "P" ;
