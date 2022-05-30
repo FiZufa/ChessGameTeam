@@ -28,8 +28,8 @@ public class ChessboardMain {
         frame.setSize(680, 680);
         frame.setVisible(true);
         System.out.println(sortMoves(posibleMoves()));
-        Object[] option={"Computer","Human"};
-        userWhite =JOptionPane.showOptionDialog(null, "Who will play first?", "ABC Options", JOptionPane.YES_NO_OPTION,
+        Object[] option={"Computer (Black)","Human (White)"};
+        userWhite =JOptionPane.showOptionDialog(null, "Who will play first?", "First Move", JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
         if (userWhite ==0) {
             long startTime=System.currentTimeMillis();
